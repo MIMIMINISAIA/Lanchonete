@@ -77,42 +77,42 @@ const dados: Itens[] = [
      nomeProduto: "Coca cola", 
      descricao: "boa demais", 
      valor: "25,00", 
-     imagem: require('../src/assets/images/homenaranha.jpeg')
+     imagem: require('../src/assets/images/coca.png')
     },
 
     {id: "11",
      nomeProduto: "Suco tropical", 
      descricao: "suco de maracuja, morango e laranja", 
      valor: "25,00", 
-     imagem: require('../src/assets/images/homenaranha.jpeg')
+     imagem: require('../src/assets/images/suco.png')
     },
 
     {id: "12", 
     nomeProduto: "Drink da loucura", 
-    descricao: "tekila, vodka, cerveja", 
+    descricao: "tekila, vodka, cerveja, laranja", 
     valor: "25,00", 
-    imagem: require('../src/assets/images/homenaranha.jpeg')
+    imagem: require('../src/assets/images/drink.png')
     },
 
     {id: "13", 
     nomeProduto: "Sprite", 
     descricao: "delicinha", 
     valor: "25,00", 
-    imagem: require('../src/assets/images/homenaranha.jpeg')
+    imagem: require('../src/assets/images/sprite.png')
    },
 
     {id: "14", 
     nomeProduto: "Suco wanda", 
     descricao: "suco de morango intenso", 
     valor: "25,00", 
-    imagem: require('../src/assets/images/homenaranha.jpeg')
+    imagem: require('../src/assets/images/sucomorango.png')
     },
 
     {id: "15", 
     nomeProduto: "Bebida hulk",
-    descricao: "suco verde", 
+    descricao: "suco verde, detox", 
     valor: "25,00", 
-    imagem: require('../src/assets/images/homenaranha.jpeg')
+    imagem: require('../src/assets/images/detox.png')
     }, 
 
 ];
