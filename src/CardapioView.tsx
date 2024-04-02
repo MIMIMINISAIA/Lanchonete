@@ -6,7 +6,6 @@ interface Itens {
     nomeProduto: string;
     descricao: string;
     valor: string;
-
     imagem: any;
 };
 
@@ -85,7 +84,7 @@ const dados: Itens[] = [
     {
         id: "10",
         nomeProduto: "𝐂𝐨𝐜𝐚 𝐂𝐨𝐥𝐚",
-        descricao: "boa demais",
+        descricao: "boa demais, pretinha, deliciosa, maravilhosa, perfeita",
         valor: "8,00",
         imagem: require('../src/assets/images/coca.png')
     },
@@ -93,7 +92,7 @@ const dados: Itens[] = [
     {
         id: "11",
         nomeProduto: "𝐒𝐮𝐜𝐨 𝐓𝐫𝐨𝐩𝐢𝐜𝐚𝐥",
-        descricao: "suco de maracuja, morango e laranja",
+        descricao: "suco de maracuja, morango, laranja, água de coco, água, limão",
         valor: "10,00",
         imagem: require('../src/assets/images/suco.png')
     },
@@ -101,7 +100,7 @@ const dados: Itens[] = [
     {
         id: "12",
         nomeProduto: "𝐃𝐫𝐢𝐧𝐤 𝐝𝐚 𝐥𝐨𝐮𝐜𝐮𝐫𝐚",
-        descricao: "tekila, vodka, cerveja, laranja",
+        descricao: "tekila, vodka, cerveja, laranja, wisk, gim, pinga, cachaça",
         valor: "16,00",
         imagem: require('../src/assets/images/drink2.png')
     },
@@ -109,7 +108,7 @@ const dados: Itens[] = [
     {
         id: "13",
         nomeProduto: "𝐒𝐩𝐫𝐢𝐭𝐞",
-        descricao: "delicinha",
+        descricao: "Sprite, geladinha, deliciosa, gostinho de limão, maravilhosa",
         valor: "5,00",
         imagem: require('../src/assets/images/sprite.png')
     },
@@ -117,7 +116,7 @@ const dados: Itens[] = [
     {
         id: "14",
         nomeProduto: "𝐒𝐮𝐜𝐨 𝐖𝐚𝐧𝐝𝐚",
-        descricao: "suco de morango intenso",
+        descricao: "suco de morango intenso, muitooo morango, água, açucar",
         valor: "10,00",
         imagem: require('../src/assets/images/sucomorango.png')
     },
@@ -125,7 +124,7 @@ const dados: Itens[] = [
     {
         id: "15",
         nomeProduto: "𝐁𝐞𝐛𝐢𝐝𝐚 𝐇𝐮𝐥𝐤",
-        descricao: "suco verde, detox",
+        descricao: "suco verde como o hulk!! hortelã, rucula, pepino, melão, limão, couve, agua de coco, gengibre",
         valor: "10,00",
         imagem: require('../src/assets/images/detox.png')
     },
@@ -136,11 +135,23 @@ const dados: Itens[] = [
 const renderItem = ({ item }: { item: Itens }) => (
     <TouchableOpacity style={styles.item}>
         <Text style={styles.text1}>{item.nomeProduto}</Text>
-        <Text style={styles.text2}>{item.descricao}</Text>
-        <TouchableOpacity>
-            <Text style={styles.text3}>{item.valor}</Text>
-        </TouchableOpacity>
+        
+        <View style={{flexDirection: 'row-reverse'}}>
+         <Text style={styles.text2}>{item.descricao}</Text>
         <Image source={item.imagem} style={styles.image} />
+        </View>
+       
+       
+            <Text style={styles.text3}>{item.valor}</Text>
+        
+
+        <TouchableOpacity>
+            <Text style={styles.botton}>Adicionar no carrinho</Text> 
+            
+        </TouchableOpacity>
+     
+
+       
 
 
 
@@ -287,7 +298,7 @@ const styles = StyleSheet.create({
 
     },
     headerText2: {
-        fontSize: 20,
+        fontSize: 30,
         fontWeight: 'bold',
         color: 'blue'
 
@@ -328,7 +339,7 @@ const styles = StyleSheet.create({
         width: 150,
         height: 150,
         alignItems: 'flex-end',
-        left: 150,
+        left: 5,
         borderRadius: 20
     },
     text1: {
@@ -342,7 +353,10 @@ const styles = StyleSheet.create({
     text2: {
         fontSize: 15,
         fontWeight: '600',
-        fontFamily: 'fonts.regular'
+        fontFamily: 'fonts.regular',
+        width: 150,
+        marginLeft: 10,
+        marginTop: 5
 
     },
     text3: {
@@ -351,11 +365,42 @@ const styles = StyleSheet.create({
         fontFamily: 'Bahnschrift SemiBold SemiConden',
         color: '#F2D22E',
         marginTop: 10,
+        left: 15,
     },
     fundo: {
         flex: 1,
         justifyContent: 'center'
     },
+    botton: {
+        fontSize: 15,
+        fontWeight: 'bold',
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#F2D22E',
+        height: 25,
+        width: 150,
+        borderRadius: 10,
+        marginLeft: 150,
+        marginTop: -25
+        
+
+    },
+    botton2: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#F2D22E',
+        height: 30,
+        width: 35,
+        borderRadius: 10,
+        marginLeft: 260,
+        marginTop: -30
+        
+        
+    }
     // pesquisa: {
     //     flexDirection: 'row',
     //     justifyContent: 'space-between',

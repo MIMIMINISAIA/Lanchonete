@@ -142,9 +142,18 @@ const renderItem = ({ item }: { item: Itens }) => (
         <Image source={item.imagem} style={styles.image} />
         </View>
 
-        <TouchableOpacity>
+        
             <Text style={styles.text3}>{item.valor}</Text>
+
+            <TouchableOpacity>
+            <Text style={styles.botton}>  +   </Text> 
+            
         </TouchableOpacity>
+        <TouchableOpacity>
+            <Text style={styles.botton2}>   - </Text> 
+            
+        </TouchableOpacity>
+       
 
 
 
@@ -317,6 +326,35 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center'
     },
+    botton: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#F2D22E',
+        height: 30,
+        width: 35,
+        borderRadius: 10,
+        marginLeft: 220
+        
+
+    },
+    botton2: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#F2D22E',
+        height: 30,
+        width: 35,
+        borderRadius: 10,
+        marginLeft: 260,
+        marginTop: -30
+        
+        
+    }
     // pesquisa: {
     //     flexDirection: 'row',
     //     justifyContent: 'space-between',
