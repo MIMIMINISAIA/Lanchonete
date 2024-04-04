@@ -5,22 +5,32 @@ import axios from 'axios';
 
 const CadastroProduto: React.FC = () => {
     const [produtos, setProdutos] = useState<Produto[]>([]);
+    const [foto, setFoto] = useState<any>('');
     const [nome, setNome] = useState<string>('');
-    const [preco, setPreco] = useState<string>('');
-    const [ingredientes, setIngredientes] = useState<string>('');
-    const [imagem, setImagem] = useState<any>('');
+    const [telefone, setTelefone] = useState<string>('');
+    const [endereco, setEndereco] = useState<string>('');
+    const [email, setEmail] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
+
+
+    
 
     const cadastrarProduto = async () => {
         try{
         const formData = new FormData();
-        formData.append('nome', nome);
-        formData.append('preco', preco);
-        formData.append('ingredientes', ingredientes);
-        formData.append('imagem', {
-            uri: imagem,
+        formData.append('foto', {
+            uri: foto,
             type: 'image/jpeg',
             name: new Date() + '.jpg'
         });
+        formData.append('nome', nome);
+        formData.append('telefone', telefone);
+        formData.append('endereco', endereco);
+        formData.append('email', email);
+        formData.append('password', password);
+
+
+      
 
         const response = await axios.post('http://10.137.11.231:8000/api/produtos', formData ,{
             headers: {
@@ -80,7 +90,7 @@ const CadastroProduto: React.FC = () => {
         <View style={styles.container}>
             <StatusBar  backgroundColor="red" barStyle="light-content"/>
             <View style={styles.header}>
-                <Text style={styles.headerTexto}>Top Food</Text>
+                <Text style={styles.headerTexto}></Text>
             </View>
             <View style={styles.form}>
                 <TextInput 
