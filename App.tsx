@@ -5,6 +5,7 @@ import LoginLanchonete from './src/loginView';
 import Carrinho from './src/carrinhoView';
 import CarrinhoView from './src/CarrinhoView';
 import CadastroProduto from './src/screens/CadastroProduto';
+import CadastroCliente from './src/screens/CadastroCliente';
 
 function App(): React.JSX.Element {
   
@@ -12,7 +13,8 @@ function App(): React.JSX.Element {
     // <Cardapio />
     // <LoginLanchonete />
     // <CarrinhoView />
-    <CadastroProduto />
+    //<CadastroProduto />
+     <CadastroCliente />
 
   );  
 }
