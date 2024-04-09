@@ -13,7 +13,7 @@ function App(): React.JSX.Element {
     // <Cardapio />
     // <LoginLanchonete />
     // <CarrinhoView />
-    //<CadastroProduto />
+    // <CadastroProduto />
      <CadastroCliente />
 
   );  
