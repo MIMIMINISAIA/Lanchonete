@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Image, ImageBackground, StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { Image, ImageBackground, ScrollView, StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { launchCamera, launchImageLibrary } from "react-native-image-picker";
 import axios from 'axios';
 
@@ -88,7 +88,10 @@ const CadastroProduto: React.FC = () => {
                 <Text style={styles.headerTexto}></Text>
 
             </View>
+            
             <ImageBackground source={require('../assets/images/fundo.png')} style={styles.fundo}>   
+            
+           
             <View style={styles.form}>
                 <TextInput
                     style={styles.input}
@@ -124,6 +127,7 @@ const CadastroProduto: React.FC = () => {
 
                 </TouchableOpacity>
             </View>
+          
             </ImageBackground>
 
             <View style={styles.footer}>
@@ -185,9 +189,10 @@ const styles = StyleSheet.create({
         color: 'white',
     },
     form: {
-        padding: 10,
+        padding: 40,
         backgroundColor: '#F2D22E',
-        marginBottom: 10
+        marginBottom: 10,
+        borderRadius: 110
 
     },
     input: {

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Image, ImageBackground, StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { Image, ImageBackground, ScrollView, StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { launchCamera, launchImageLibrary } from "react-native-image-picker";
 import axios from 'axios';
 
@@ -8,6 +8,7 @@ const CadastroCliente: React.FC = () => {
     const [foto, setFoto] = useState<any>('');
     const [nome, setNome] = useState<string>('');
     const [telefone, setTelefone] = useState<string>('');
+    const [cpf, setCpf] = useState<string>('');
     const [endereco, setEndereco] = useState<string>('');
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
@@ -26,7 +27,8 @@ const CadastroCliente: React.FC = () => {
             formData.append('nome', nome);
             formData.append('telefone', telefone);
             formData.append('endereco', endereco);
-            formData.append('email', email);
+            formData.append('cpf', cpf);
+             formData.append('email', email);
             formData.append('password', password);
 
 
@@ -104,7 +106,7 @@ const CadastroCliente: React.FC = () => {
             
 
            
-            
+          <ScrollView>
             <View style={styles.form}>
                 <TextInput
                     style={styles.input}
@@ -117,6 +119,12 @@ const CadastroCliente: React.FC = () => {
                     placeholder="Telefone"
                     value={telefone}
                     onChangeText={setTelefone} />
+                    
+                <TextInput
+                    style={styles.input}
+                    placeholder="cpf"
+                    value={cpf}
+                    onChangeText={setCpf} />
 
                 <TextInput
                     style={styles.input}
@@ -156,6 +164,8 @@ const CadastroCliente: React.FC = () => {
 
                 
             </View>
+            </ScrollView>
+           
 
             </ImageBackground>
 
@@ -226,9 +236,10 @@ const styles = StyleSheet.create({
     },
     //#f0f0f0
     form: {
-        padding: 10,
+        padding: 50,
         backgroundColor: '#F2D22E',
-        marginBottom: 10
+        marginBottom: 10,
+        borderRadius: 150
 
     },
     input: {
