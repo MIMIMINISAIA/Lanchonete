@@ -2,51 +2,49 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { FlatList, Image, ImageBackground, StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 
-function Listagem(): React.JSX.Element {
-    
-    const [produtos, setProdutos] = useState<Produtos[]>([]);
+
 
 
 interface Produtos {
     id: string;
-    nome: string;   
+    nome: string;
     descricao: string;
     valor: string;
     images: string;
 }
 
+function Listagem(): React.JSX.Element {
+    const [produtos, setProdutos] = useState<Produtos[]>([]);
+    const [erro, setErro] = useState<string>("");
+    const [count, setCount] = useState(0);
+
     useEffect(() => {
-        listarProdutos();
+        async function fetchData() {
+            try {
+                const response = await axios.get<Produtos[]>('http://10.137.11.231:8000/api/produtos/all');
+                setProdutos(response.data);
+                console.log(response.data);
+
+            } catch (error) {
+                setErro("Ocorreu um erro");
+                console.log(error)
+            }
+        }
+        fetchData();
     }, []);
 
-
-
-
-    const listarProdutos = async () => {
-        try {
-            const response = await axios.get('http://10.137.11.231:8000/api/produtos/all');
-            if (response.status === 200) {
-                setProdutos(response.data); // Set the state with the correct data
-                console.log(response.data);
-            }
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
-
-
     const renderItem = ({ item }: { item: Produtos }) => (
-        <TouchableOpacity style={styles.item} >
+        <TouchableOpacity style={styles.item} 
+        activeOpacity={0.7}
+        onPress={() => {
+          setCount(count + 1)
+        }}>
             <Text style={styles.text1}>{item.nome}</Text>
             <Text style={styles.text2}>{item.descricao}</Text>
             <Text style={styles.text3}>{item.valor}</Text>
-          <Image source={{uri:item.images}} style={styles.img} />
+          { /* <Image source={item.images} style={styles.img} />  */}
         </TouchableOpacity>
     );
-
-
-
 
 
 
@@ -61,7 +59,7 @@ interface Produtos {
                     </TouchableOpacity>
                     <Image source={require('../assets/images/logo.png')} style={styles.logo} />
                     <Text style={styles.headerText2}>𝑪𝒂𝒓𝒅𝒂́𝒑𝒊𝒐 𝑯𝒆𝒓𝒐𝒊𝒄𝒐</Text>
-                   
+
                     {/* <View>
                         <View style={styles.pesquisa}>
                             <Image source={require('./assets/images/lupa.png')} style={styles.lupa}
@@ -89,7 +87,7 @@ interface Produtos {
 
 
                 />
-                
+
             </ImageBackground>
             {/* <View>
                         <View style={styles.pesquisa}>
@@ -143,10 +141,9 @@ interface Produtos {
 
                 </TouchableOpacity>
             </View>
-            
-
         </View>
     );
+
 }
 
 const styles = StyleSheet.create({
@@ -268,7 +265,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         marginLeft: 150,
         marginTop: -25
-        
+
 
     },
     botton2: {
@@ -283,8 +280,8 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         marginLeft: 260,
         marginTop: -30
-        
-        
+
+
     }
     // pesquisa: {
     //     flexDirection: 'row',
@@ -313,5 +310,7 @@ const styles = StyleSheet.create({
 
 
 
-})
+});
+
+
 export default Listagem;
