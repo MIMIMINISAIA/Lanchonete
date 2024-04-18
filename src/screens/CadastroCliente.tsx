@@ -12,11 +12,43 @@ const CadastroCliente: React.FC = () => {
     const [endereco, setEndereco] = useState<string>('');
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
+    const [errors, setErrors] = useState<Record<string, string>>({});
+
+    const validarCampos = () => {
+        const errors: Record<string, string> = {};
+
+        if (!foto) {
+            errors.foto = "Foto é obrigatória";
+        }
+        if (!nome) {
+            errors.nome = "Nome é obrigatório";
+        }
+        if (!endereco) {
+            errors.endereco = "Endereço é obrigatório";
+        }
+        if (!telefone) {
+            errors.telefone = "Telefone é obrigatório";
+        }
+        if (!email) {
+            errors.email = "E-mail é obrigatório";
+        }
+        if (!cpf) {
+            errors.cpf = "CPF é obrigatório";
+        }
+        if (!password) {
+            errors.password = "Senha é obrigatória";
+        }
+        setErrors(errors);
+        return Object.keys(errors).length === 0;
+    }
 
 
 
 
     const cadastrarProduto = async () => {
+        if (!validarCampos()) {
+            return;
+        }
         try {
             const formData = new FormData();
             formData.append('foto', {
@@ -112,43 +144,50 @@ const CadastroCliente: React.FC = () => {
                     style={styles.input}
                     placeholder="Nome"
                     value={nome}
-                    onChangeText={setNome} />
+                    onChangeText={setNome} 
+                />{errors.nome && <Text style={styles.errorText}>{errors.nome}</Text>}
 
                 <TextInput
                     style={styles.input}
                     placeholder="Telefone"
                     value={telefone}
-                    onChangeText={setTelefone} />
+                    onChangeText={setTelefone} 
+                />{errors.telefone && <Text style={styles.errorText}>{errors.telefone}</Text>}
                     
                 <TextInput
                     style={styles.input}
                     placeholder="cpf"
                     value={cpf}
-                    onChangeText={setCpf} />
+                    onChangeText={setCpf} 
+                />{errors.cpf && <Text style={styles.errorText}>{errors.cpf}</Text>}
 
                 <TextInput
                     style={styles.input}
                     placeholder="endereço"
                     value={endereco}
-                    onChangeText={setEndereco} />
+                    onChangeText={setEndereco} 
+                />{errors.endereco && <Text style={styles.errorText}>{errors.endereco}</Text>}
 
                 <TextInput
                     style={styles.input}
                     placeholder="email"
                     value={email}
-                    onChangeText={setEmail} />
+                    onChangeText={setEmail} 
+                />{errors.email && <Text style={styles.errorText}>{errors.email}</Text>}
 
                 <TextInput
                     style={styles.input}
                     placeholder="Password"
                     value={password}
-                    onChangeText={setPassword} />
+                    onChangeText={setPassword}
+                />{errors.password && <Text style={styles.errorText}>{errors.password}</Text>}
 
 
                 <View style={styles.alinhamentoImageSelecionada}>
                     {foto ? <Image source={{ uri: foto }} style={styles.imageSelecionada} /> : null}
+                    
 
-                </View>
+                </View>{errors.foto && <Text style={styles.errorText}>{errors.foto}</Text>}
                
                 <TouchableOpacity style={styles.imageButton} onPress={selecionarImagem}>
                     <Text style={styles.imageButtonText}>Selecionar Foto</Text>
@@ -239,7 +278,7 @@ const styles = StyleSheet.create({
         padding: 50,
         backgroundColor: '#F2D22E',
         marginBottom: 10,
-        borderRadius: 150
+        borderRadius: 100
 
     },
     input: {
@@ -323,6 +362,10 @@ const styles = StyleSheet.create({
         width: 35,
         height: 35
 
+    },
+    errorText: {
+        color: '#3B9ABF',
+        marginBottom: 5,
     },
 
 });

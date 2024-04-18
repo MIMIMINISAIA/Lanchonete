@@ -9,8 +9,31 @@ const CadastroProduto: React.FC = () => {
     const [valor, setValor] = useState<string>('');
     const [descricao, setDescricao] = useState<string>('');
     const [imagem, setImagem] = useState<any>('');
+    const [errors, setErrors] = useState<Record<string, string>>({});
+
+    const validarCampos = () => {
+        const errors: Record<string, string> = {};
+
+       
+        if (!nome) {
+            errors.nome = "Nome é obrigatório";
+        }
+        if (!valor) {
+            errors.valor = "Valor é obrigatório";
+        }
+        if (!descricao) {
+            errors.descricao = "Descrição é obrigatório";
+        }
+        
+        setErrors(errors);
+        return Object.keys(errors).length === 0;
+    }
+
 
     const cadastrarProduto = async () => {
+        if (!validarCampos()) {
+            return;
+        }
         try {
             const formData = new FormData();
             formData.append('nome', nome);
@@ -97,24 +120,27 @@ const CadastroProduto: React.FC = () => {
                     style={styles.input}
                     placeholder="Nome do produto"
                     value={nome}
-                    onChangeText={setNome} />
+                    onChangeText={setNome} 
+                    />{errors.nome && <Text style={styles.errorText}>{errors.nome}</Text>}
 
                 <TextInput
                     style={styles.input}
                     placeholder="valor"
                     value={valor}
-                    onChangeText={setValor} />
+                    onChangeText={setValor} 
+                />{errors.valor && <Text style={styles.errorText}>{errors.valor}</Text>}
 
                 <TextInput
                     style={styles.input}
                     placeholder="descrição"
                     value={descricao}
                     onChangeText={setDescricao}
-                    multiline />
+                    multiline 
+                />{errors.descricao && <Text style={styles.errorText}>{errors.descricao}</Text>}
                 <View style={styles.alinhamentoImageSelecionada}>
                     {imagem ? <Image source={{ uri: imagem }} style={styles.imageSelecionada} /> : null}
 
-                </View>
+                </View>{errors.foto && <Text style={styles.errorText}>{errors.foto}</Text>}
                 <TouchableOpacity style={styles.imageButton} onPress={selecionarImagem}>
                     <Text style={styles.imageButtonText}>Selecionar imagem</Text>
                 </TouchableOpacity>
@@ -274,6 +300,10 @@ const styles = StyleSheet.create({
         width: 35,
         height: 35
 
+    },
+    errorText: {
+        color: '#3B9ABF',
+        marginBottom: 5,
     },
 
 });
