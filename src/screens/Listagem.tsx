@@ -5,46 +5,43 @@ import { FlatList, Image, ImageBackground, StatusBar, StyleSheet, Text, TextInpu
 
 
 
-interface Produtos {
+interface Produto {
     id: string;
     nome: string;
     descricao: string;
     valor: string;
-    images: string;
+    images: any;
 }
 
-function Listagem(): React.JSX.Element {
-    const [produtos, setProdutos] = useState<Produtos[]>([]);
-    const [erro, setErro] = useState<string>("");
-    const [count, setCount] = useState(0);
+const Listagem = () => {
+    const [produtos, setProdutos] = useState<Produto[]>([]);
 
     useEffect(() => {
-        async function fetchData() {
-            try {
-                const response = await axios.get<Produtos[]>('http://10.137.11.231:8000/api/produtos/all');
-                setProdutos(response.data);
-                console.log(response.data);
-
-            } catch (error) {
-                setErro("Ocorreu um erro");
-                console.log(error)
-            }
-        }
-        fetchData();
+        listarProdutos();
     }, []);
 
-    const renderItem = ({ item }: { item: Produtos }) => (
-        <TouchableOpacity style={styles.item} 
-        activeOpacity={0.7}
-        onPress={() => {
-          setCount(count + 1)
-        }}>
-            <Text style={styles.text1}>{item.nome}</Text>
+    const listarProdutos = async () => {
+        try {
+            const response = await axios.get('http://10.137.11.231:8000/api/produtos/all');
+            if (response.status === 200) {
+                setProdutos(response.data); 
+                 console.log(produtos);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+
+    const renderItem = ({ item }: { item: Produto }) => (
+        <View style={styles.item}>
+            <Text   style={styles.text1}>{item.nome}</Text>
             <Text style={styles.text2}>{item.descricao}</Text>
             <Text style={styles.text3}>{item.valor}</Text>
-          { /* <Image source={item.images} style={styles.img} />  */}
-        </TouchableOpacity>
+             <Image source={item.images} style={styles.img} /> 
+        </View>
     );
+
 
 
 
@@ -80,13 +77,9 @@ function Listagem(): React.JSX.Element {
 
 
                 <FlatList
-                    showsHorizontalScrollIndicator={true}
-                    data={produtos}
-                    renderItem={renderItem}
-                    keyExtractor={(item) => item.id}
-
-
-                />
+                data={produtos}
+                renderItem={renderItem}
+                keyExtractor={(produtos) => produtos.id}  />
 
             </ImageBackground>
             {/* <View>

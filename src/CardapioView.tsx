@@ -1,3 +1,5 @@
+import { useNavigation } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
 import { FlatList, Image, ImageBackground, StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 
@@ -8,6 +10,8 @@ interface Itens {
     valor: string;
     imagem: any;
 };
+
+
 
 const dados: Itens[] = [
     {
@@ -165,6 +169,8 @@ const renderItem = ({ item }: { item: Itens }) => (
 
 
 function Cardapio(): React.JSX.Element {
+
+    const navigation = useNavigation(); 
     return (
         <View style={styles.container} >
             <ImageBackground source={require('./assets/images/fundo.png')} style={styles.fundo}>
@@ -221,22 +227,22 @@ function Cardapio(): React.JSX.Element {
 
             <View style={styles.footer}>
 
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.navigate('cardapio')}>
                     <Image
                         source={require('./assets/images/menu.png')}
                         style={styles.footerIcon}
                     />
-                </TouchableOpacity>
+                </TouchableOpacity >
 
 
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() =>navigation.navigate('Carrinho')}>
                     <Image source={require('./assets/images/pedidos.png')}
                         style={styles.footerIcon}
                     />
 
                 </TouchableOpacity>
 
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() =>navigation.navigate('CadastroCliente')}>
                     <Image source={require('./assets/images/marvel.png')}
                         style={styles.footerIcon2}
                     />
@@ -244,14 +250,14 @@ function Cardapio(): React.JSX.Element {
                 </TouchableOpacity>
 
 
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() =>navigation.navigate('Listagem')}>
                     <Image source={require('./assets/images/home.png')}
                         style={styles.footerIcon}
                     />
 
                 </TouchableOpacity>
 
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() =>navigation.navigate('Cardapio')}>
                     <Image source={require('./assets/images/hero.png')}
                         style={styles.footerIcon}
                     />
